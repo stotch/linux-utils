@@ -1,0 +1,12 @@
+# This is a simple for that, for every sd[a-z] disk added or modified in
+# the system, if the drive is not a spinning disk, set the I/O scheduler
+# to be "noop". You can easily change this to deadline or something
+# else, if you want, but I have never seen solid evidence on modern SSDs
+# to suggest that any of the other schedulers are worth wasting kernel
+# pages on. 99% of my infrastructure runs on one form of SSD or another
+# (SD cards, M.2/NVMe, 2.5" ATA, USB, etc) and I have used all of the
+# schedulers and even modified them myself to eek out whatever benefits
+# I could. Noop is the way to go, except in very specialized situations.
+
+ACTION=="add|change", KERNEL=="sd[a-z]", ATTR{queue/rotational}=="0",ATTR{queue/scheduler}="noop"
+

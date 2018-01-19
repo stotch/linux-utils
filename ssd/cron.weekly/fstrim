@@ -1,0 +1,8 @@
+#!/bin/sh
+# TRIM all mounted file systems which support it. I pushed the weekly
+# version of this. Place it wherever you like. The vast majority of my
+# systems keep 90% of their work in memory and so more frequent runs of
+# fstrim are not necessary except with just certain select systems. So,
+# if you have heavy/large write activity, you might want to shcedule
+# this more frequently.
+/sbin/fstrim --all || true
